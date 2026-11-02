@@ -4,6 +4,8 @@ import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 
 const jakarta = Plus_Jakarta_Sans({
     subsets: ["latin"],
@@ -27,7 +29,11 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-                {children}
+                <div className="flex min-h-screen flex-col">
+                    <Navbar />
+                    <main className="flex-1">{children}</main>
+                    <Footer />
+                </div>
                 <Toaster richColors position="top-right" />
             </ThemeProvider>
         </html>
