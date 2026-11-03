@@ -26,8 +26,8 @@ export async function Navbar() {
           <Image
             src="/bhalobeat-logo.png"
             alt="BhaloBeat"
-            width={200}
-            height={64}
+            width={400}
+            height={128}
             priority
             className="h-11 w-auto sm:h-14 lg:h-16"
           />
