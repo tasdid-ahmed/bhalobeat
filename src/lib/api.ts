@@ -76,3 +76,10 @@ export async function getUpcomingEvents(limit?: number): Promise<EventItem[]> {
   );
   return result.data;
 }
+
+export async function getEventById(id: string): Promise<EventItem> {
+  const result = await apiRequest<{ data: EventItem }>(
+    `/api/events/${encodeURIComponent(id)}`
+  );
+  return result.data;
+}
