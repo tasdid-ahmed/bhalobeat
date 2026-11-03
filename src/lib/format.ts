@@ -11,3 +11,13 @@ export function formatEventDate(value: string): string {
 export function toDateInputValue(value: string): string {
   return value.slice(0, 10);
 }
+
+export function isPastEvent(value: string): boolean {
+  const now = new Date();
+  const startOfToday = Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate()
+  );
+  return new Date(value).getTime() < startOfToday;
+}
