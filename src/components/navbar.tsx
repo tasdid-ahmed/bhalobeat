@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { UserMenu } from "@/components/user-menu";
 
 export function Navbar() {
   return (
@@ -16,7 +16,10 @@ export function Navbar() {
             className="h-10 w-auto"
             priority
           />
-          
+          <span className="hidden font-heading text-xl font-extrabold sm:inline">
+            <span className="text-secondary">Bhalo</span>
+            <span className="text-primary">Beat</span>
+          </span>
         </Link>
 
         <div className="flex items-center gap-2 sm:gap-4">
@@ -27,9 +30,7 @@ export function Navbar() {
             Upcoming Events
           </Link>
           <ThemeToggle />
-          <Button asChild size="lg">
-            <Link href="/login">Login</Link>
-          </Button>
+          <UserMenu />
         </div>
       </nav>
     </header>
