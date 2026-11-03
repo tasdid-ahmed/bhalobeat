@@ -17,10 +17,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { authClient } from "@/lib/auth-client";
 
-export function UserMenu() {
+export type NavbarUser = {
+  name: string;
+  email: string;
+  image: string | null;
+};
+
+export function UserMenu({ user }: { user: NavbarUser | null }) {
   const router = useRouter();
-  const { data: session, isPending } = authClient.useSession();
-  const user = session?.user;
 
   // Welcome toast after a Google login redirect.
   useEffect(() => {
@@ -42,16 +46,16 @@ export function UserMenu() {
     router.refresh();
   }
 
-  // Avoids flashing the Login button while the session loads.
-  if (isPending) {
-    return <div className="size-9 animate-pulse rounded-full bg-muted" />;
-  }
-
   if (!user) {
     return (
-      <Button asChild size="lg">
-        <Link href="/login">Login</Link>
-      </Button>
+      <div className="flex items-center gap-2">
+        <Button asChild variant="outline" size="lg" className="hidden md:inline-flex">
+          <Link href="/register">Register</Link>
+        </Button>
+        <Button asChild size="lg">
+          <Link href="/login">Login</Link>
+        </Button>
+      </div>
     );
   }
 
@@ -66,7 +70,7 @@ export function UserMenu() {
             className="rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <Avatar className="size-9">
-              <AvatarImage src={user.image ?? undefined} alt={user.name} />
+              <AvatarImage src={user.image ?? undefined} alt={user.name} referrerPolicy="no-referrer" />
               <AvatarFallback>{user.name.charAt(0).toUpperCase()}</AvatarFallback>
             </Avatar>
           </button>
