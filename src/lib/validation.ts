@@ -49,3 +49,43 @@ export function collectErrors<K extends string>(
   }
   return errors;
 }
+
+export function validateText(
+  value: string,
+  label: string,
+  min: number,
+  max: number
+): string | null {
+  const text = value.trim();
+  if (!text) return `Please enter the ${label}.`;
+  if (text.length < min) return `The ${label} must be at least ${min} characters.`;
+  if (text.length > max) return `The ${label} must be at most ${max} characters.`;
+  return null;
+}
+
+export function validateSelect(
+  value: string,
+  label: string,
+  options: readonly string[]
+): string | null {
+  if (!value) return `Please choose the ${label}.`;
+  if (!options.includes(value)) return `Please choose a valid ${label}.`;
+  return null;
+}
+
+// Today's date as YYYY-MM-DD in the visitor's own time zone.
+export function todayInputValue(): string {
+  return new Date().toLocaleDateString("en-CA");
+}
+
+export function validateEventDate(value: string): string | null {
+  if (!value) return "Please choose the event date.";
+  if (
+    !/^\d{4}-\d{2}-\d{2}$/.test(value) ||
+    Number.isNaN(new Date(`${value}T00:00:00Z`).getTime())
+  ) {
+    return "Please enter a valid event date.";
+  }
+  if (value < todayInputValue()) return "Event date cannot be in the past.";
+  return null;
+}
