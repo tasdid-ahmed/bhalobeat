@@ -16,10 +16,7 @@ export function Navbar() {
             className="h-10 w-auto"
             priority
           />
-          <span className="font-heading text-xl font-extrabold">
-            <span className="text-secondary">Bhalo</span>
-            <span className="text-primary">Beat</span>
-          </span>
+          
         </Link>
 
         <div className="flex items-center gap-2 sm:gap-4">
