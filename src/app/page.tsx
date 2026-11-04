@@ -1,7 +1,11 @@
+import { FeaturesSection } from "@/components/home/features-section";
+import { Hero } from "@/components/home/hero";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center">
-      <h1 className="text-3xl font-bold">BhaloBeat</h1>
-    </main>
+    <>
+      <Hero />
+      <FeaturesSection />
+    </>
   );
 }
