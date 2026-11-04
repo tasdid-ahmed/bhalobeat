@@ -72,7 +72,6 @@ export function Footer() {
               <li key={cause}>{cause}</li>
             ))}
           </ul>
-          <p className="mt-5 text-sm opacity-90">Made with care in Dhaka, Bangladesh</p>
         </div>
       </div>
 
