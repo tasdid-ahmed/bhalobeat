@@ -1,10 +1,12 @@
 const configuredApiUrl = process.env.NEXT_PUBLIC_API_URL?.trim();
 
-if (!configuredApiUrl && process.env.NODE_ENV === "production") {
-  throw new Error("NEXT_PUBLIC_API_URL must be set for production builds.");
+if (!configuredApiUrl) {
+  throw new Error(
+    "NEXT_PUBLIC_API_URL is not set. Add it to your .env file and to your hosting environment variables."
+  );
 }
 
-export const API_URL = (configuredApiUrl || "http://localhost:5000").replace(/\/+$/, "");
+export const API_URL = configuredApiUrl.replace(/\/+$/, "");
 
 export type EventItem = {
   _id: string;
