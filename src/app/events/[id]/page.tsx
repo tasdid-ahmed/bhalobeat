@@ -6,7 +6,7 @@ import { JoinButton } from "@/components/events/join-button";
 import { Button } from "@/components/ui/button";
 import { ApiError, getEventById, type EventItem } from "@/lib/api";
 import { auth } from "@/lib/auth";
-import { formatEventDate } from "@/lib/format";
+import { formatEventDate, isPastEvent } from "@/lib/format";
 
 async function getIsLoggedIn(): Promise<boolean> {
   try {
@@ -47,7 +47,7 @@ export default async function EventDetailsPage({
   const isLoggedIn = await getIsLoggedIn();
   const today = new Date();
   today.setUTCHours(0, 0, 0, 0);
-  const isPast = new Date(event.date) < today;
+  const isPast = isPastEvent(event.date);
 
   return (
     <article className="mx-auto max-w-5xl px-4 py-10 sm:px-6">

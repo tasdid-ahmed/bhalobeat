@@ -12,12 +12,10 @@ export function toDateInputValue(value: string): string {
   return value.slice(0, 10);
 }
 
+export function todayInDhaka(): string {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Dhaka" }).format(new Date());
+}
+
 export function isPastEvent(value: string): boolean {
-  const now = new Date();
-  const startOfToday = Date.UTC(
-    now.getUTCFullYear(),
-    now.getUTCMonth(),
-    now.getUTCDate()
-  );
-  return new Date(value).getTime() < startOfToday;
+  return value.slice(0, 10) < todayInDhaka();
 }

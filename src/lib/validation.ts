@@ -1,3 +1,5 @@
+import { todayInDhaka } from "@/lib/format";
+
 export type FieldErrors<K extends string> = Partial<Record<K, string>>;
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -73,16 +75,18 @@ export function validateSelect(
   return null;
 }
 
-// Today's date as YYYY-MM-DD in the visitor's own time zone.
+// Today's date in Dhaka as YYYY-MM-DD (the same rule the server uses).
 export function todayInputValue(): string {
-  return new Date().toLocaleDateString("en-CA");
+  return todayInDhaka();
 }
 
 export function validateEventDate(value: string): string | null {
   if (!value) return "Please choose the event date.";
+  const parsed = new Date(`${value}T00:00:00Z`);
   if (
     !/^\d{4}-\d{2}-\d{2}$/.test(value) ||
-    Number.isNaN(new Date(`${value}T00:00:00Z`).getTime())
+    Number.isNaN(parsed.getTime()) ||
+    parsed.toISOString().slice(0, 10) !== value
   ) {
     return "Please enter a valid event date.";
   }
